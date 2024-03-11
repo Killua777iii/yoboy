@@ -7,7 +7,7 @@ class Bdd
     function __construct()
     {
 
-        $dsn = 'mysql:dbname=projetphpjs;host=127.0.0.1';
+        $dsn = 'mysql:dbname=projetphpjss;host=127.0.0.1';
         $dbUser = 'root';
         $dbPwd = '';
 
@@ -36,8 +36,10 @@ class Bdd
 
         FROM 
         heros
-  Inner JOIN powerstats ON heros.id_heros = powerstats.fk_heros
-  JOIN images on heros.id_heros=images.fk_heros";
+  Inner JOIN powerstats ON heros.id_heros = powerstats.fk_heros 
+  JOIN 
+    images ON heros.id_heros = images.fk_heros"
+   ;
 
         $query = $this->bdd->prepare($sql);
         $query->execute();
@@ -102,5 +104,45 @@ Where heros.id_heros=$idhero;
 
 
     }
+    function Inscription($prenom,$nom,$email,$mdp){
+        $hashedPassword = password_hash($mdp, PASSWORD_DEFAULT);
+
+            // Préparer la requête d'insertion
+            $stmt = $this->bdd->prepare("INSERT INTO `client`(`nom`, `prenom`, `email`, `motDePasse`) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$nom, $prenom, $email, $hashedPassword]);
+
+            echo "Utilisateur enregistré avec succès.";
+            return true;
+    }
+function connexion($email,$pwd){
+
+    $stmt = $this->bdd->prepare("SELECT id, motDePasse FROM client WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user) {
+        echo "Identifiantss invalides";
+        return false;
+    }
+    // Vérifiez si le mot de passe correspond
+    if (password_verify($pwd, $user['motDePasse'])) {
+        echo "Connexion réussie. L'utilisateur avec l'ID " . $user['id'] . " est connecté.";
+        return true;
+    } else {
+        echo "Identifiants invalides";
+        return false;
+    }
+}
+function getCommentaires($idheros){
+    $sql ="SELECT `id_commentaire`, `description`, `fk_client`, `fk_heros`, `nom` FROM `commentaire` inner join client on client.id = commentaire.fk_client where fk_heros=$idheros ";
+    $query = $this->bdd->prepare($sql);
+    $query->execute();
+    return $query->fetchAll();
+    
+}
+function addCommentaire($description,$fk_client,$fk_heros){
+    $stmt = $this->bdd->prepare("INSERT INTO commentaire (description, fk_client, fk_heros) VALUES (?, ?, ?)");
+    $stmt->execute([$description, $fk_client, $fk_heros]);
+}
 
 }

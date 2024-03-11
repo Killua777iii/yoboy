@@ -91,6 +91,28 @@ include "../view/header.php"
     </div>
 </div>
 
+
+<div style="margin-left: 20px; margin-right: 20px;">
+    <?php
+    if (is_array($commentaire) || is_object($commentaire)) {
+        $j = 0;
+        foreach ($commentaire as $p) {
+            echo '<div style="margin-left: 20px; margin-right: 20px;">';
+            echo '<br>';
+            echo $p['nom'] . ' : ' . $p['description'];
+            echo '</div>';
+        }
+    }
+    ?>
+</div>
+
+<form action="../controller/envoieCommentaire.php" method="post" style="margin-left: 20px; margin-right: 20px;">
+    <textarea id="text" name="text" style="width: 100%;"></textarea>
+    <input type="hidden" name="idhero" value="<?php echo $_GET["id"]; ?>">
+    <input type="hidden" name="iduti" value="1">
+    <input type="submit" value="Envoyer">
+</form>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

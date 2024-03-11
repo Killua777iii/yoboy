@@ -79,12 +79,14 @@ include "../view/header.php"
   <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4 login-container">
-                <form class="form-signin" action="../Controller/connexion.php" method="POST">
+                <form class="form-signin" action="../Controller/inscription.php" method="POST">
                     <h2 class="text-center">Connexion</h2>
-                    <input type="mail" id="inputEmail" class="form-control" placeholder="email" name="email" required autofocus>
+                    <input type="mail" id="inputEmail" class="form-control" placeholder="Email" name="email" required autofocus>
+                    <input type="text" id="nom" class="form-control" placeholder="Nom" name="nom" required autofocus>
+                    <input type="text" id="prenom" class="form-control" placeholder="prenom" name="prenom" required autofocus>
                     <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" name="mdp" required>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
-                    <a href="../view/inscription.php" class="btn btn-xs btn-info btn-block" > S'inscrire </a>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">S'inscrire</button>
+                    <a href="../view/connexion.php" class="btn btn-xs btn-info btn-block" >Se connecter  </a>
                 </form>
             </div>
         </div>
