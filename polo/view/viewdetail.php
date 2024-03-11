@@ -56,28 +56,38 @@ include "../view/header.php"
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            <div class="color-box bg-success">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-            <div class="color-box bg-danger">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-            <div class="color-box bg-warning">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-        </div>
-        <div class="col-md-6 center-content">
-            <div class="photo-container">
-            <img src="https://media.gqmagazine.fr/photos/6571d7e79779b8a3415b0a9b/16:9/w_2560%2Cc_limit/Tom-Holland-Spiderman-what-we-know-so-far.jpg" alt="Photo">   
-            </div>
-            <div class="Lorem">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rhoncus dolor sit amet nulla tincidunt,
-                non fermentum metus suscipit. Aliquam erat volutpat. Sed gravida eu mi id mattis. Nulla vitae fermentum
-                justo. Curabitur sit amet sem in lectus interdum vulputate sed a urna. Fusce varius, orci nec tempus
-                tincidunt, felis quam viverra libero, sed consequat eros nunc nec tellus. Donec vel leo ultrices, viverra
-                quam vel, laoreet lacus. Nulla facilisi. Nulla facilisi.
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="color-box bg-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-            <div class="color-box bg-dark">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-            <div class="color-box bg-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-        </div>
+    <?php
+            if (is_array($poule) || is_object($poule)) {
+            $j = 0;
+            foreach ($poule as $p) {
+        
+
+                // Affichage du HTML
+                echo '<div class="col-md-3">';
+                echo '<div class="color-box bg-success">Intelligence: '. $p['intelligence'].'</div>';
+                echo '<div class="color-box bg-danger">Strength: '. $p['strength'].'</div>';
+                echo '<div class="color-box bg-warning">Speed: '. $p['speed'].'</div>';
+                echo '</div>';
+
+                echo '<div class="col-md-6 center-content">';
+                echo '<div class="photo-container">';
+                echo '<img src="https://media.gqmagazine.fr/photos/6571d7e79779b8a3415b0a9b/16:9/w_2560%2Cc_limit/Tom-Holland-Spiderman-what-we-know-so-far.jpg" alt="Photo">';
+                echo '</div>';
+                echo '<div class="Lorem">';
+                echo 'Nom complet =' . $p["fullName"] . ' Alter Egos ='.$p["alterEgos"] . ' Lieu de naissance = ' . $p["placeOfBirth"] . ' Premiére Apparence : ' . $p["firstAppearance"];
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="col-md-3">';
+                echo '<div class="color-box bg-primary">Durability: '. $p['durability'].'</div>';
+                echo '<div class="color-box bg-dark">Power: '. $p['power'].'</div>';
+                echo '<div class="color-box bg-light">Combat: '. $p['combat'].'</div>';
+                echo '</div>';
+
+
+
+            }
+        }
+        ?>
     </div>
 </div>
 
